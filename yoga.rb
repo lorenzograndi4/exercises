@@ -1,12 +1,41 @@
-def select_product
-  @products.each {|p| puts"#{p[:id]}. #{p[:name].capitalize} ($ #{p[:price]})"}
+
+#
+# def look_up_product(input)
+#   @products.each do |p|
+#     if p[:id] == input.to_i
+#       @shopping_cart << p
+#     end
+#   end
+# end
+
+# def continue_shopping
+#   puts "Do you want to continue shopping?"
+#   answer = gets.chomp
+#   answer.upcase == 'Y'
+# end
+def present_products
+  @products.each {|p| puts"#{p[:id]}. #{p[:name].capitalize} ($#{p[:price]})"}
   puts "What would you like to buy? (1-7)"
-  item[:id] = gets.chomp.to_i
-  shopping_cart << item
-  puts shopping_cart
 end
 
-shopping_cart = []
+def select_products
+  input = gets.chomp.to_i
+  @products.each do |product|
+    if product[:id] == input
+      @shopping_cart << product
+    end
+  end
+end
+
+def present_cart
+  puts "In your cart:"
+  @shopping_cart.each {|product| puts "#{product[:id]}: #{product[:name].capitalize} ($#{product[:price]})"}
+  # total_price = @shopping_cart.each {|product| total_price += product[:price]}
+  # puts "Your total price is $#{total_price}."
+
+end
+
+@shopping_cart = []
 
 @products = [
   {id: 1, name: 'fork', price: 100},
@@ -19,4 +48,7 @@ shopping_cart = []
 ]
 
 puts "Welcome! Buy some of this:"
-select_product
+present_products
+select_products
+present_cart
+puts "Thanks for your visit!"
