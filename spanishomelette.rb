@@ -18,3 +18,31 @@ ingredients = [
   { name: 'oil', quantity: 'some' },
   { name: 'salt', quantity: 'some' },
 ]
+
+puts "*    Let's cook a Spanish Omelette!    *"
+print_divider
+
+puts "You need the following ingredients:"
+
+ingredients.each do |ingredient|
+  puts "* #{ingredient[:quantity]} #{ingredient[:name]}"
+end
+
+loop do
+  puts "\n"
+  print_divider
+
+  print "Got all ingredients you need? (Y/N) "
+  answer = gets.chomp.upcase
+
+  case answer
+  when 'N'
+    puts "Oops, you need to go shopping."
+    print_progress_bar
+  when 'Y'
+    puts "Great! Let's start cooking!"
+    break
+  else
+    puts "That's not a valid input. Try again."
+  end
+end
