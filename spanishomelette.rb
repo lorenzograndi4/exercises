@@ -4,7 +4,7 @@ def print_divider
 end
 
 def print_progress_bar
-  10.times { sleep 0.3; print "." }
+  3.times { sleep 0.2; print "." }
   puts "\n"
 end
 
@@ -129,3 +129,6 @@ steps.each_with_index do |step, index|
 
   send(step[:action])
 end
+
+print_divider
+puts "Que rico! Enjoy your meal!"
