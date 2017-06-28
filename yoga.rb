@@ -8,11 +8,6 @@
 #   end
 # end
 
-# def continue_shopping
-#   puts "Do you want to continue shopping?"
-#   answer = gets.chomp
-#   answer.upcase == 'Y'
-# end
 def present_products
   @products.each {|p| puts"#{p[:id]}. #{p[:name].capitalize} ($#{p[:price]})"}
   puts "What would you like to buy? (1-7)"
@@ -30,12 +25,21 @@ end
 def present_cart
   puts "In your cart:"
   @shopping_cart.each {|product| puts "#{product[:id]}: #{product[:name].capitalize} ($#{product[:price]})"}
-  # total_price = @shopping_cart.each {|product| total_price += product[:price]}
-  # puts "Your total price is $#{total_price}."
 
+  @shopping_cart.each do |product|
+    @total_price += product[:price]
+  end
+  puts "Your total price is $#{@total_price}."
+end
+
+def stop_shopping
+  print "Do you want to continue shopping? (Y/N) "
+  answer = gets.chomp.upcase
+  answer == "N"
 end
 
 @shopping_cart = []
+@total_price = 0
 
 @products = [
   {id: 1, name: 'fork', price: 100},
@@ -48,7 +52,12 @@ end
 ]
 
 puts "Welcome! Buy some of this:"
-present_products
-select_products
-present_cart
+
+loop do
+  present_products
+  select_products
+  present_cart
+  break if stop_shopping
+end
+
 puts "Thanks for your visit!"
