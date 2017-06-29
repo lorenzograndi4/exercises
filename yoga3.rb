@@ -1,5 +1,4 @@
 # Define cart, depts and products
-
 @shopping_cart = []
 @total_price = 0
 @departments = [:clothes, :kitchen, :garden, :books]
@@ -25,16 +24,26 @@
 # Methods
 def present_depts
   @departments.each_with_index {|dept, index| puts "#{index + 1}) #{dept.capitalize}"}
+  gets.chomp.to_i - 1
 end
 
-def present_products
-  input = gets.chomp.to_i
-  @departments.each_with_index {|dept, index|  }
+def present_products(dept_index)
+  # @departments.each_with_index do |dept, index|
+  #   puts "Let's go to the #{dept.capitalize} department then! Here is what you can select:" if (index + 1) == input
+  # end
+  department = @departments[dept_index]
+  products = @products[department]
+
+  puts "These are the products under the #{department.to_s.upcase} department:"
+  products.each do |product|
+    puts "Reference nr.: #{product[:reference_number]} #{product[:name]} #{product[:price]} EUR"
+  end
 end
+
 # Shopping flow
 
 #loop do
-  puts "Welcome to this expensive store! Which department would you like to go to? (1-4)"
-  present_depts
-  present_products
+  puts "Welcome to this expensive store! Which department would you like to go to? (1-#{@departments.length})"
+  dept_index = present_depts
+  present_products(dept_index)
 #end
